@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: hrmanager_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: hradmin
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_DB: hrmanager
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: ./server
+      dockerfile: src/Api/Dockerfile
+    container_name: hrmanager_api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Default: Host=db;Port=5432;Database=hrmanager;Username=hradmin;Password=changeme
+      Jwt__SecretKey: change-me-super-secret-key-123
+      Frontend__Origin: http://localhost:4173
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: hrmanager_client
+    environment:
+      VITE_API_URL: http://api:8080
+    ports:
+      - "4173:80"
+    depends_on:
+      - api
+
+volumes:
+  pgdata:

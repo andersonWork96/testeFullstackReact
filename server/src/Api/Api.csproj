@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <RootNamespace>HrManager.Api</RootNamespace>
+    <UserSecretsId>dotnet-HrManager-Api</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..&#x2F;Application&#x2F;Application.csproj" />
+    <ProjectReference Include="..&#x2F;Infrastructure&#x2F;Infrastructure.csproj" />
+    <ProjectReference Include="..&#x2F;Domain&#x2F;Domain.csproj" />
+  </ItemGroup>
+</Project>

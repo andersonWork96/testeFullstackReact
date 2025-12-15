@@ -1,0 +1,25 @@
+# Backend
+bin/
+obj/
+**/bin/
+**/obj/
+*.user
+*.rsuser
+*.suo
+*.cache
+*.vs
+
+# Frontend
+client/node_modules/
+client/dist/
+client/.vite/
+
+# Environment
+*.env
+*.env.*
+*.db
+*.sqlite
+.dotnet/
+
+# OS
+.DS_Store
