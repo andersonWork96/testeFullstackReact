@@ -25,6 +25,7 @@ public class EmployeeRepository : IEmployeeRepository
             .Include(e => e.Manager)
             .Include(e => e.Phones)
             .Include(e => e.TeamMembers)
+            .AsTracking()
             .AsSplitQuery()
             .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
     }
@@ -34,6 +35,7 @@ public class EmployeeRepository : IEmployeeRepository
         return await _dbContext.Employees
             .Include(e => e.Phones)
             .Include(e => e.Manager)
+            .AsTracking()
             .FirstOrDefaultAsync(e => e.Email == email, cancellationToken);
     }
 
@@ -42,6 +44,7 @@ public class EmployeeRepository : IEmployeeRepository
         return await _dbContext.Employees
             .Include(e => e.Phones)
             .Include(e => e.Manager)
+            .AsTracking()
             .FirstOrDefaultAsync(e => e.DocumentNumber == documentNumber, cancellationToken);
     }
 

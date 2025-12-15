@@ -62,8 +62,13 @@ public class Employee
 
     public void UpdateContact(string email, IEnumerable<PhoneNumber> phones)
     {
-        Email = email;
-        Phones = phones.ToList();
+        Email = email ?? throw new ArgumentNullException(nameof(email));
+        ArgumentNullException.ThrowIfNull(phones);
+
+        Phones ??= new List<PhoneNumber>();
+        Phones.Clear();
+        Phones.AddRange(phones);
+
         Touch();
     }
 
@@ -71,6 +76,18 @@ public class Employee
     {
         Role = role;
         ManagerId = managerId;
+        Touch();
+    }
+
+    public void UpdateDocument(string documentNumber)
+    {
+        DocumentNumber = documentNumber;
+        Touch();
+    }
+
+    public void UpdateBirthDate(DateTime birthDate)
+    {
+        BirthDate = birthDate;
         Touch();
     }
 

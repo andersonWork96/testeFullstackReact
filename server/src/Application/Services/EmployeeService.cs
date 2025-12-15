@@ -140,6 +140,8 @@ public class EmployeeService : IEmployeeService
         }
 
         employee.UpdateNames(request.FirstName, request.LastName);
+        employee.UpdateDocument(request.DocumentNumber);
+        employee.UpdateBirthDate(request.BirthDate);
         employee.UpdateContact(request.Email, request.Phones.Select(p => new PhoneNumber(p.Label, p.Number)));
         employee.UpdateRole(request.Role, request.ManagerId);
 
